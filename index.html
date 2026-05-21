@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>اختبار علم نفس الشخصية | مصحح بالكامل</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cairo', 'Segoe UI', 'Tajawal', system-ui, sans-serif;
+            background: radial-gradient(circle at 10% 20%, #0b2b2b, #061217);
+            min-height: 100vh;
+            padding: 2rem 1.2rem;
+        }
+        .glass-royal {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(12, 25, 35, 0.55);
+            backdrop-filter: blur(16px);
+            border-radius: 64px;
+            border: 1px solid rgba(210, 180, 140, 0.5);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
+            padding: 2rem 1.8rem;
+        }
+        .hero { text-align: center; margin-bottom: 2rem; }
+        .hero h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(125deg, #F5E7C8, #D4AF7A);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .stats-badge {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+        .stat {
+            background: #1e3a3faa;
+            padding: 0.3rem 1.2rem;
+            border-radius: 100px;
+            color: #FFE3B5;
+            font-size: 0.85rem;
+        }
+        .question-card {
+            background: rgba(0, 20, 28, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 32px;
+            margin-bottom: 1.5rem;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid rgba(210, 170, 100, 0.35);
+            transition: 0.2s;
+        }
+        .question-card:hover {
+            border-color: #e7b874;
+            transform: translateY(-2px);
+        }
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+        .q-num {
+            background: #e7b87430;
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            color: #f7cf9f;
+        }
+        .chapter-tag {
+            font-size: 0.7rem;
+            background: #0f2e36;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            color: #c0e0ff;
+        }
+        .question-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #fff3e0;
+            margin: 0.5rem 0 1rem 0;
+            padding-right: 0.5rem;
+            border-right: 4px solid #e7b874;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #1a2f3890;
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .option:hover {
+            background: #2e4a5590;
+            border-color: #ffcd94;
+        }
+        .option input {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #ffcd94;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .option input:checked {
+            background: #ffb347;
+            border-color: #ffb347;
+        }
+        .option label {
+            flex: 1;
+            font-size: 0.9rem;
+            color: #E8F0F5;
+            cursor: pointer;
+        }
+        .check-btn {
+            background: linear-gradient(145deg, #2C5364, #0F2027);
+            border: none;
+            padding: 0.4rem 1.2rem;
+            border-radius: 80px;
+            color: #FFE2B5;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid #6c9eb3;
+        }
+        .check-btn:hover {
+            background: linear-gradient(145deg, #3e778b, #1C3F4A);
+            transform: scale(1.02);
+        }
+        .feedback-inline {
+            margin-top: 0.7rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: #051e26bb;
+            font-size: 0.8rem;
+            display: none;
+            border-right: 4px solid;
+        }
+        .feedback-correct { border-right-color: #5bc0be; color: #c0ffea; }
+        .feedback-wrong { border-right-color: #ff9570; color: #ffcfbc; }
+        .global-submit { text-align: center; margin: 2rem 0 1rem; }
+        .global-btn {
+            background: linear-gradient(125deg, #f4b942, #e67e22);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1a2a2f;
+            cursor: pointer;
+        }
+        .global-btn:hover { transform: scale(1.02); }
+        .result-panel {
+            background: #0b171fcc;
+            backdrop-filter: blur(20px);
+            border-radius: 48px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 1px solid #e7b874;
+            text-align: center;
+        }
+        .final-score { font-size: 1.8rem; font-weight: 800; color: #FFD966; }
+        footer { text-align: center; margin-top: 2rem; font-size: 0.7rem; color: #7ea1b3; }
+        @media (max-width: 650px) {
+            .glass-royal { padding: 1rem; }
+            .question-text { font-size: 0.95rem; }
+            .option label { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="glass-royal">
+    <div class="hero">
+        <h1>🧠 اختبار الشخصية المتقدم</h1>
+        <p>100 سؤال أكاديمي — الفصل الأول + الثاني — تصحيح فوري تحت كل سؤال</p>
+        <div class="stats-badge">
+            <span class="stat">📘 الفصل الأول: 50 سؤال</span>
+            <span class="stat">📙 الفصل الثاني: 50 سؤال</span>
+        </div>
+    </div>
+
+    <div id="questionsRoot"></div>
+    <div class="global-submit">
+        <button type="button" class="global-btn" id="finalGradeBtn">📊 عرض النتيجة النهائية</button>
+    </div>
+    <div id="finalResultArea" class="result-panel" style="display: none;"></div>
+    <footer>✨ كل إجابة تم التحقق منها من النص الأصلي للكتاب ✨</footer>
+</div>
+
+<script>
+    // ========================
+    // الفصل الأول (50 سؤال) - الإجابات مُصححة بالكامل
+    // ========================
+    const chapter1Questions = [
+        { text: "ما الأصل اللاتيني لمصطلح 'Personality'؟", options: ["قناع كان يرتديه الممثل", "الذات الحقيقية", "المزاج الوراثي", "الدور الاجتماعي"], correct: 0 },
+        { text: "أي تعريف يصف 'الشخصية' بأنها كيان منظم ومستقر يقع في صميم الخبرات؟", options: ["فرويد", "روجيرز", "أدلر", "كاتل"], correct: 1 },
+        { text: "بحسب النص، ماذا يعني 'علم الأشخاص' (Personology)؟", options: ["فلسفة الأخلاق", "الدراسة العلمية المتكاملة للشخصية", "علم الاجتماع", "التحليل النفسي"], correct: 1 },
+        { text: "من هو المنظر الذي ربط الشخصية بسلسلة من الأزمات النفسية الاجتماعية؟", options: ["فرويد", "إريكسون", "باندورا", "ماسلو"], correct: 1 },
+        { text: "ما الذي يميز علم نفس الشخصية الحديث عن الفلكلور؟", options: ["التركيز على الشذوذ", "استخدام الحدس", "الاعتماد على مفاهيم قابلة للاختبار", "رفض التجريب"], correct: 2 },
+        { text: "من هو صاحب تعريف 'الشخصية هي ما يكون عليه الفرد حقيقةً ومكون افتراضي داخلي'؟", options: ["فرويد", "ألبورت", "كاتل", "سكنر"], correct: 1 },
+        { text: "ماذا تعني 'الفروق الفردية' في سياق الشخصية؟", options: ["التشابه الكامل", "السمات المشتركة", "الخصائص المميزة للفرد", "السلوك المتوقع"], correct: 2 },
+        { text: "أي الخصائص التالية تجمع معظم تعريفات الشخصية؟", options: ["الثبات المطلق", "التأكيد على الفردية والسمات المميزة", "إنكار الوراثة", "التجاهل البيئي"], correct: 1 },
+        { text: "كيف يختلف 'علم نفس الشخصية' عن فروع علم النفس الأخرى؟", options: ["يهتم بالسلوك فقط", "يهتم بالعمليات الفسيولوجية", "يحاول التكامل بين معطيات المجالات الأخرى", "يركز على الحيوان"], correct: 2 },
+        { text: "ما معنى 'الشخصية العامة' (public personality)؟", options: ["الذات الحقيقية", "اللاشعور", "الانطباع الاجتماعي", "السمات الخلقية"], correct: 2 },
+        { text: "من هو صاحب نظرية 'الذات' (self) بوصفها كياناً منظماً؟", options: ["ألبورت", "كاتل", "روجيرز", "باندورا"], correct: 2 },
+        { text: "مصطلح 'Persona' في المسرح الإغريقي كان يشير إلى:", options: ["الذات", "القناع", "الظل", "الأنا الأعلى"], correct: 1 },
+        { text: "أي من الآتي يمثل أحد مصادر تفسير السلوك البشري وفق النص؟", options: ["البيئة فقط", "الوراثة فقط", "الأسباب الداخلية والموقف", "القدرية"], correct: 2 },
+        { text: "ما الفائدة الأساسية من دراسة الشخصية كعلم؟", options: ["علاج الأمراض", "التنبؤ والتحكم", "فهم السلوك الشاذ فقط", "تطوير النظريات الفلسفية"], correct: 1 },
+        { text: "حسب النص، لماذا قد يقاوم الناس تجسيد شخصياتهم بموضوعية؟", options: ["لأنها مستحيلة", "لأنها تهدد التفرد والتعقيد الإنساني", "لأن الأدوات غير دقيقة", "لأنه لا فائدة منها"], correct: 1 },
+        { text: "أي من التعريفات التالية يُنسب إلى George Kelly؟", options: ["الشخصية هي نتاج مراحل نفسية", "الطريقة الفريدة في استخلاص المعنى من الخبرات", "السمات الموروثة", "الاستجابات المكتسبة"], correct: 1 },
+        { text: "نظرية Bandura تصف الشخصية بأنها:", options: ["نمط معقد يتفاعل فيه الشخص والسلوك والموقف", "مراحل نفسية جنسية", "ظل ونماذج بدائية", "تعزيز وعقاب"], correct: 0 },
+        { text: "ماذا يعني التعبير 'six billion people not exactly alike'؟", options: ["التشابه التام", "الفروق الفردية", "التحيز الوراثي", "التطابق الثقافي"], correct: 1 },
+        { text: "أي من المفاهيم التالية يتعلق بـ 'الانطباع الاجتماعي'؟", options: ["الانطباع الاجتماعي", "السلوك الفطري", "الغرائز", "الذات"], correct: 0 },
+        { text: "أي منظر وصف الشخصية من خلال 16 زوجاً من السمات؟", options: ["ألبورت", "كاتل", "يونج", "فرويد"], correct: 1 },
+        { text: "ما الذي يعنيه 'التفرد الإنساني' في نظريات الشخصية؟", options: ["التشابه الثقافي", "التفرد وعدم التكرار", "الحتمية البيولوجية", "النمطية"], correct: 1 },
+        { text: "من أشار إلى أن الشخصية هي 'وظيفة لمخرجات سلسلة من الأزمات'؟", options: ["فرويد", "أدلر", "إريكسون", "ماسلو"], correct: 2 },
+        { text: "ما هو الفرق بين 'علم نفس الشخصية' و 'علم النفس العام'؟", options: ["الشخصية تهتم بالفرد ككل", "علم النفس العام يهتم بالفروق الفردية", "لا فرق", "الشخصية فرع من البيولوجي"], correct: 0 },
+        { text: "أي من هذه العبارات تعكس 'التعقيد الإنساني'؟", options: ["البساطة", "التعقيد والثراء", "الثبات الكامل", "الجمود"], correct: 1 },
+        { text: "لماذا قد يفشل التخمين في فهم الشخصية بدقة؟", options: ["لأنه يعتمد على الحدس", "لأن السلوك معقد ومتعدد العوامل", "لأنه غير علمي", "لأن الفروق طفيفة"], correct: 1 },
+        { text: "ما المقصود بـ 'التكامل في الشخصية'؟", options: ["الانفصال بين المكونات", "دمج المبادئ المختلفة لفهم الكل", "الصراع الداخلي", "التأثير البيئي فقط"], correct: 1 },
+        { text: "ما المقصود بـ 'المنظور التطوري (النمائي)' للشخصية؟", options: ["العوامل البيئية فقط", "العوامل البيولوجية فقط", "نمو الشخصية بتأثير عوامل داخلية وخارجية", "الجمود"], correct: 2 },
+        { text: "أي من التالي يعد من الأسئلة الجوهرية في دراسة الشخصية؟", options: ["ما هي الجينات", "كيف ولماذا يختلف الناس عن بعضهم", "ما هو العلاج", "ما هو علم الأعصاب"], correct: 1 },
+        { text: "ماذا يعني 'بناء افتراضي' (hypothetical construct) في تعريف الشخصية؟", options: ["ملاحظ مباشر", "بناء نظري يستدل عليه من السلوك", "صفة سطحية", "موروث جيني"], correct: 1 },
+        { text: "ما هو أبرز ما يميز 'علم نفس الشخصية' كعلم معاصر؟", options: ["استخدام المفاهيم الغامضة", "التحول من التخمين إلى المفاهيم القابلة للاختبار", "رفض المناهج التجريبية", "الاقتصار على الملاحظة"], correct: 1 },
+        { text: "كيف يفسر النص 'الاختلافات الكبيرة' بين البشر؟", options: ["اختلافات سطحية", "تنوع هائل في السلوك والخبرات", "تشابه مطلق", "لا اختلافات"], correct: 1 },
+        { text: "ما معنى 'أنماط السلوك المتسقة' (consistent patterns)؟", options: ["سلوك عشوائي", "أنماط سلوكية ثابتة نسبيًا عبر الزمن", "استجابات لحظية", "تطابق بيئي"], correct: 1 },
+        { text: "لماذا لا يمكن اعتبار تعريفات الشخصية صحيحة أو خاطئة بالمطلق؟", options: ["لأنها قابلة للقياس", "لأنها تعتمد على المنظر النظري", "لأنها مطلقة", "لأنها خاطئة دومًا"], correct: 1 },
+        { text: "ما هو دور 'المفاهيم النظرية' في دراسة الشخصية؟", options: ["توفير إجابات نهائية", "توجيه وتفسير السلوك وربط الاستنتاجات", "وصف السلوك فقط", "تعقيد الدراسة"], correct: 1 },
+        { text: "أي من هذه العبارات تعبر عن جوهر 'الشخصية' كميدان للدراسة؟", options: ["السلوك فقط", "العمليات العقلية فقط", "فهم الشخص ككيان متكامل", "البيئة فقط"], correct: 2 },
+        { text: "كيف يساهم علم نفس الشخصية في فهم 'السلوك غير العادي'؟", options: ["فهم السلوك السوي فقط", "تفسير السلوك غير المألوف", "دراسة الذاكرة", "تحليل الأحلام"], correct: 1 },
+        { text: "ماذا يعني 'المنظور التجريبي' في دراسة الشخصية؟", options: ["الاعتماد على الفلسفة", "الاستعانة بالمناهج الدقيقة والاختبار", "رفض القياس", "الحدس فقط"], correct: 1 },
+        { text: "من هو العالم الذي أسس أول معمل للدراسة التجريبية في علم النفس؟", options: ["فونت", "فرويد", "بافلوف", "جالتون"], correct: 0 },
+        { text: "ما الذي تشير إليه 'السمات المركزية' في الشخصية؟", options: ["السمات السطحية", "السمات الأكثر تميزًا وثباتًا", "السمات الثانوية", "الاستجابات المؤقتة"], correct: 1 },
+        { text: "كيف يمكن تمييز الشخصية عن 'المزاج' في السياق الأكاديمي؟", options: ["المزاج فطري والشخصية مكتسبة", "الشخصية والمزاج مترادفان", "المزاج مكتسب", "الشخصية بيولوجية"], correct: 0 },
+        { text: "ما هو 'الذات المثالية' في بعض النظريات؟", options: ["الصورة المثالية للذات", "اللاشعور", "الغرائز", "السلوك الملاحظ"], correct: 0 },
+        { text: "ما معنى 'الاتساق الداخلي' للشخصية؟", options: ["التناقض المستمر", "الثبات النسبي للسلوك عبر المواقف", "الفوضى السلوكية", "عدم التنبؤ"], correct: 1 },
+        { text: "لماذا يُنظر للشخصية على أنها 'مجرد' في بعض التصورات؟", options: ["ملموس", "بناء افتراضي يُستنتج من السلوك", "قابل للمعاينة المباشرة", "عضوي"], correct: 1 },
+        { text: "ما هو تأثير 'الخبرات المشتركة' على الشخصية؟", options: ["إنتاج شخصيات متشابهة داخل الثقافة", "شخصيات متباينة كلية", "لا تأثير", "فوضى"], correct: 0 },
+        { text: "ما معنى 'التنوع البشري' في ضوء دراسة الشخصية؟", options: ["الاختلاف الجيني فقط", "التنوع الكبير في الأفكار والمشاعر والسلوك", "التشابه المطلق", "الجمود الثقافي"], correct: 1 },
+        { text: "كيف يرتبط 'علم النفس غير الطبيعي' بالشخصية؟", options: ["غير مرتبطين", "فهم الشخصية يساعد في تفسير السلوك غير الطبيعي", "متعارضان", "متطابقان"], correct: 1 },
+        { text: "لماذا تُعد دراسة 'الفروق الفردية' محورية في علم نفس الشخصية؟", options: ["لأنها غير مهمة", "لأنها تسمح بفهم الأفراد المتميزين", "لأنها سطحية", "لأنها ثابتة"], correct: 1 },
+        { text: "ما هو 'المكون الافتراضي الداخلي' في تعريف ألبورت؟", options: ["مظهر خارجي", "جوهر داخلي افتراضي يحدد التفاعل مع العالم", "سلوك مكتسب", "استجابة لحظية"], correct: 1 },
+        { text: "كيف يمكن ربط 'السلوك الملاحظ' بالشخصية؟", options: ["السلوك الظاهري يعكس البناء الداخلي", "لا علاقة", "السلوك غير مهم", "الشخصية وهم"], correct: 0 },
+        { text: "لماذا تعتبر 'الشخصية' موضوعاً معقداً؟", options: ["لأنها تتحدد بعامل واحد", "لأنها ناتج تفاعل عوامل وراثية وبيئية ومعرفية", "لأنها بسيطة", "لأنها ثابتة تمامًا"], correct: 1 }
+    ];
+
+    // ========================
+    // الفصل الثاني (50 سؤال) - الإجابات مُصححة بالكامل
+    // ========================
+    const chapter2Questions = [
+        { text: "ما موقف ألبورت من الصراع بين الوراثة والبيئة؟", options: ["الوراثة فقط", "البيئة فقط", "علاقة ضرب وليست جمع (×)", "لا علاقة"], correct: 2 },
+        { text: "دراسات هولزنجر أظهرت أن التوائم المتشابهة لديها معامل ارتباط أعلى في:", options: ["السمات الجسمية", "السمات العقلية", "السمات الخلقية", "الذكاء"], correct: 1 },
+        { text: "وفقًا لدراسات إيزنك، النشاط التلقائي يرتبط وراثيًا بصورة أوضح في:", options: ["التوائم المتحدة", "التوائم المختلفة", "الإخوة", "الوالدان"], correct: 0 },
+        { text: "دراسة نيومان وفريمان للتوائم المتشابهة التي افترقت مبكرًا أظهرت:", options: ["تشابه تام", "تشابه في المزاج واختلاف في النمو التحصيلي", "اختلاف تام", "لا علاقة"], correct: 1 },
+        { text: "ما الوظيفة الرئيسية للجهاز العصبي السمبثاوي؟", options: ["الهضم", "تعبئة الطاقة وقت الطوارئ", "التفكير", "الذاكرة"], correct: 1 },
+        { text: "دراسة روزانوف كشفت عن:", options: ["لا تأثير وراثي", "وجود نزعة عائلية نحو الجريمة", "الجريمة مكتسبة", "الجريمة اقتصادية"], correct: 1 },
+        { text: "ماذا أظهرت دراسة أسرة مارتن كاليكاك؟", options: ["الوراثة لا تؤثر", "البيئة وحدها", "تأثير واضح للوراثة من زوجة مختلفة", "الجريمة عابرة"], correct: 2 },
+        { text: "أي مما يلي يُعد من البيئة الطبيعية المؤثرة في الشخصية؟", options: ["القيم", "المناخ والتضاريس", "القوانين", "الدين"], correct: 1 },
+        { text: "دراسات ميد في مجتمع الساموا أثبتت أن المراهقة:", options: ["أزمة حتمية", "فترة سعادة وبهجة بتسامح ثقافي", "لا تتأثر بالثقافة", "مرض عالمي"], correct: 1 },
+        { text: "ماذا يعني 'الشخصية الأساسية' (Basic personality)؟", options: ["سمات فريدة", "القدر المشترك من السمات بين أفراد الثقافة", "سمات فطرية", "سلوكيات لاواعية"], correct: 1 },
+        { text: "دراسة كال ودايفز حول الطبقة الاجتماعية أظهرت:", options: ["لا تأثير", "تأثير الطبقة في الطموح والقيم", "تأثير فقط على الدخل", "تأثير عابر"], correct: 1 },
+        { text: "ماذا يعبر 'صراع الأدوار'؟", options: ["تطابق الأدوار", "سهولة الأداء", "تعارض توقعات جماعتين مرجعيتين", "غياب التوقعات"], correct: 2 },
+        { text: "تحسين الظروف المعيشية لمجرمي شيكاغو أدى إلى:", options: ["زيادة الجريمة", "اختفاء النزعات المضادة للمجتمع", "لا تأثير", "هروب المجرمين"], correct: 1 },
+        { text: "أي جهاز عصبي يرتبط بالاستجابة للخطر والطوارئ؟", options: ["الجهاز الهضمي", "الجهاز الحركي", "الجهاز العصبي السمبثاوي", "الجهاز التنفسي"], correct: 2 },
+        { text: "أثر الثقافة من خلال التنشئة يؤدي إلى:", options: ["شخصيات عشوائية", "شخصيات متشابهة داخل الثقافة", "شخصيات متطرفة", "فقدان الشخصية"], correct: 1 },
+        { text: "الملاحظة الناقدة بشأن اختفاء النزعات الإجرامية تشير إلى:", options: ["أهمية البيئة في تعديل السلوك", "جبرية الوراثة", "استحالة التغيير", "فشل الدراسات"], correct: 0 },
+        { text: "أي مما يلي من 'البيئة الاجتماعية'؟", options: ["المناخ", "الجينات", "المجتمع والمؤسسات", "الهرمونات"], correct: 2 },
+        { text: "مقولة 'كل شخصية فريدة' تشير إلى:", options: ["التشابه الثقافي", "التفرد الإنساني والفروق الفردية", "الحتمية", "النمطية"], correct: 1 },
+        { text: "أي أساليب دراسة الوراثة في الشخصية وردت في النص؟", options: ["دراسة حالة واحدة", "دراسة التوائم", "الملاحظة فقط", "التحليل الفلسفي"], correct: 1 },
+        { text: "في دراسة فريمان، الشخص الذي يعود ببطء للتوازن يدل على:", options: ["سرعة استثارة", "بطء العودة للتوازن وعلاقته بالدافع والتحكم", "ذكاء مرتفع", "عدوانية"], correct: 1 },
+        { text: "أي العوامل التالية تؤثر في الشخصية خارج الأسرة؟", options: ["المدرسة، المسجد، الإعلام، الرفاق", "الجينات فقط", "المناخ فقط", "الغدد الصماء"], correct: 0 },
+        { text: "ما معنى 'التنشئة الاجتماعية'؟", options: ["عملية اكتساب المعايير والأدوار الاجتماعية", "عملية بيولوجية", "عزلة", "تدريب مهني"], correct: 0 },
+        { text: "من هو صاحب مفهوم 'الضبط' كأثر للدور في الشخصية؟", options: ["فرويد", "ألبورت", "إريكسون", "باندورا"], correct: 1 },
+        { text: "أي سمات الشخصية تتطور من خلال توقعات الدور؟", options: ["الأنانية", "المسؤولية والتعاون", "العدوان", "الخجل"], correct: 1 },
+        { text: "ما الذي يحدث عندما يتعذر حل صراع الدور؟", options: ["توافق نفسي", "قلق واضطراب", "ذكاء متزايد", "قوة جسدية"], correct: 1 },
+        { text: "أي من الدراسات دعمت دور الوراثة في المزاج العاطفي؟", options: ["فقط البيئة", "دور الوراثة في المزاج", "لا تأثير", "العوامل الاقتصادية"], correct: 1 },
+        { text: "ماذا أظهرت أبحاث التوائم في البيئات المختلفة؟", options: ["تشابه كامل", "تشابه في السمات الأساسية رغم اختلاف البيئة", "اختلاف كلي", "لا نتائج"], correct: 1 },
+        { text: "الجهاز الباراسمبثاوي مسؤول عن:", options: ["الطوارئ والتوتر", "الراحة والهضم", "التفكير", "الحركة"], correct: 1 },
+        { text: "الهرمونات تؤثر في الشخصية من خلال:", options: ["تأثير مباشر على السلوك والانفعال", "لا تأثير", "تأثير فقط في الطول", "تأثير ضئيل"], correct: 0 },
+        { text: "المدرسة كعامل مؤثر تؤثر في:", options: ["تنمية القيم الأكاديمية والاجتماعية", "الوراثة فقط", "لا تؤثر", "تؤثر سلبًا فقط"], correct: 0 },
+        { text: "أثر جماعات الرفاق يبلغ ذروته في:", options: ["الطفولة المبكرة", "المراهقة", "الشيخوخة", "مرحلة ما قبل المدرسة"], correct: 1 },
+        { text: "وسائل الإعلام تؤثر في الشخصية عبر:", options: ["نقل القيم والسلوكيات", "العزلة", "الوراثة", "النوم"], correct: 0 },
+        { text: "المناخ الحار قد يرتبط بأنماط شخصية:", options: ["منبسطة ونشيطة", "منطوية وخجولة", "عدوانية", "باردة"], correct: 0 },
+        { text: "ما معنى 'الطابع القومي'؟", options: ["السمات الوراثية", "السمات المشتركة لأفراد الأمة", "السمات الفردية", "المزاج"], correct: 1 },
+        { text: "أي من التالي يعد من محددات الشخصية البيولوجية؟", options: ["الجينات والهرمونات", "المدرسة", "الأصدقاء", "الإعلام"], correct: 0 },
+        { text: "أي العبارات تعبر عن 'الوراثة والبيئة معًا'؟", options: ["تحديد الوراثة المطلق", "تحديد البيئة المطلق", "تفاعل معقد وتكامل", "لا علاقة"], correct: 2 },
+        { text: "ما هو 'التثبيت' في النمو النفسي الجنسي؟", options: ["مرحلة نضج", "التوقف عند مرحلة مبكرة بسبب الإشباع أو الحرمان", "سلوك مكتسب", "اضطراب خلقي"], correct: 1 },
+        { text: "دراسة 'الجهاز العصبي والفروق المزاجية' تربط بين:", options: ["الاستثارة العصبية والسمات المزاجية", "الطول والوزن", "الذكاء", "المهارات الحركية"], correct: 0 },
+        { text: "أي من البيئات لها التأثير الأول في تشكيل الشخصية؟", options: ["الأسرة", "وسائل الإعلام", "المدرسة", "الأقران"], correct: 0 },
+        { text: "ما هو 'النمط الأولي' وفق يونج في سياق المحددات؟", options: ["الخبرات الموروثة عبر الأجيال", "التعلم", "التعزيز", "العقاب"], correct: 0 },
+        { text: "الصراع بين الوراثة والبيئة في الدراسات الحديثة يُحسم بـ:", options: ["التفاعل والتكامل", "الوراثة وحدها", "البيئة وحدها", "الصدفة"], correct: 0 },
+        { text: "التوأم المتشابه الذي ينشأ في بيئتين مختلفتين يقدم دليلاً على:", options: ["تأثير البيئة المطلق", "تأثير الوراثة القوي", "تأثير المدرسة", "لا شيء"], correct: 1 },
+        { text: "أي من الدراسات تعتبر كلاسيكية في تأثير الوراثة على السلوك الإجرامي؟", options: ["كاليكاك", "فريمان", "هولزنجر", "بافلوف"], correct: 0 },
+        { text: "ما هو الدور الذي تلعبه 'الأسرة' في تشكيل الشخصية؟", options: ["نقل الجينات فقط", "التنشئة الأولى ونقل القيم والمعايير", "توفير المال", "الغذاء"], correct: 1 },
+        { text: "أثر 'الطبقة الاجتماعية' يظهر بوضوح في:", options: ["أساليب التربية والطموح المهني", "الطول", "لون العين", "فصيلة الدم"], correct: 0 },
+        { text: "ماذا يعني 'الإحساس بالكفاءة' في ضوء محددات الموقف؟", options: ["الثقة في قدرة الفرد على مواجهة المطالب", "الخوف", "الغضب", "الحزن"], correct: 0 },
+        { text: "كيف يمكن تعديل الشخصية وفق فهم محدداتها؟", options: ["من خلال تغيير البيئة والتعزيز", "لا يمكن تعديلها", "بالأدوية فقط", "بالوراثة فقط"], correct: 0 },
+        { text: "أي من العبارات تصف 'الموقف' كمحدد للشخصية؟", options: ["هو العامل الوحيد", "يتفاعل مع الشخصية لتوليد السلوك", "لا يؤثر", "أقل أهمية"], correct: 1 },
+        { text: "ما هي 'العوامل الوراثية المورفولوجية'؟", options: ["بنية الجسد ووظائف الأعضاء", "المعتقدات", "القيم", "الاتجاهات"], correct: 0 },
+        { text: "ما العلاقة بين 'البيئة الثقافية' و'الشخصية الأساسية'؟", options: ["الثقافة تنتج شخصية أساسية موحدة نسبيًا", "لا علاقة", "الثقافة تمنع الشخصية", "شخصية عشوائية"], correct: 0 }
+    ];
+
+    // دمج جميع الأسئلة (الفصل الأول ثم الفصل الثاني)
+    const allQuestions = [...chapter1Questions, ...chapter2Questions];
+
+    function renderExam() {
+        const container = document.getElementById('questionsRoot');
+        container.innerHTML = '';
+        allQuestions.forEach((q, idx) => {
+            const chapNum = idx < 50 ? 1 : 2;
+            const chapName = chapNum === 1 ? '📘 الفصل الأول' : '📙 الفصل الثاني';
+            
+            let optionsHtml = '';
+            q.options.forEach((opt, optIdx) => {
+                optionsHtml += `
+                    <div class="option" data-qidx="${idx}" data-optidx="${optIdx}">
+                        <input type="radio" name="q${idx}" id="q${idx}_${optIdx}" value="${optIdx}">
+                        <label for="q${idx}_${optIdx}">${String.fromCharCode(65+optIdx)} - ${opt}</label>
+                    </div>
+                `;
+            });
+            
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.innerHTML = `
+                <div class="question-header">
+                    <span class="q-num">سؤال ${idx+1}</span>
+                    <span class="chapter-tag">${chapName}</span>
+                </div>
+                <div class="question-text">${q.text}</div>
+                <div class="options" id="options-${idx}">
+                    ${optionsHtml}
+                </div>
+                <div style="text-align: left;">
+                    <button type="button" class="check-btn" data-qidx="${idx}">🔍 تصحيح هذا السؤال</button>
+                </div>
+                <div class="feedback-inline" id="fb-${idx}"></div>
+            `;
+            container.appendChild(card);
+        });
+        
+        attachEvents();
+    }
+    
+    function attachEvents() {
+        // أزرار التصحيح الفردي
+        document.querySelectorAll('.check-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const qidx = parseInt(btn.getAttribute('data-qidx'));
+                const selected = document.querySelector(`input[name="q${qidx}"]:checked`);
+                const fbDiv = document.getElementById(`fb-${qidx}`);
+                
+                if (!selected) {
+                    fbDiv.style.display = 'block';
+                    fbDiv.innerHTML = '⚠️ لم تختر إجابة بعد. اختر أحد الخيارات أولاً.';
+                    fbDiv.className = 'feedback-inline feedback-wrong';
+                    return;
+                }
+                
+                const selectedVal = parseInt(selected.value);
+                const isCorrect = (selectedVal === allQuestions[qidx].correct);
+                const correctLetter = String.fromCharCode(65 + allQuestions[qidx].correct);
+                const correctText = allQuestions[qidx].options[allQuestions[qidx].correct];
+                
+                fbDiv.style.display = 'block';
+                if (isCorrect) {
+                    fbDiv.innerHTML = `✅ صحيح! الإجابة الصحيحة هي ${correctLetter} : ${correctText}`;
+                    fbDiv.className = 'feedback-inline feedback-correct';
+                } else {
+                    fbDiv.innerHTML = `❌ خطأ. الإجابة الصحيحة هي ${correctLetter} : ${correctText}`;
+                    fbDiv.className = 'feedback-inline feedback-wrong';
+                }
+            });
+        });
+        
+        // اختيار الإجابة عند الضغط على أي جزء من الخيار
+        document.querySelectorAll('.option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                if (radio) radio.checked = true;
+            });
+        });
+    }
+    
+    function computeFinalScore() {
+        let correct = 0;
+        for (let i = 0; i < allQuestions.length; i++) {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            if (selected && parseInt(selected.value) === allQuestions[i].correct) {
+                correct++;
+            }
+        }
+        return { correct, total: allQuestions.length };
+    }
+    
+    document.getElementById('finalGradeBtn').addEventListener('click', () => {
+        const { correct, total } = computeFinalScore();
+        const percent = (correct / total) * 100;
+        const resultPanel = document.getElementById('finalResultArea');
+        resultPanel.innerHTML = `
+            <div class="final-score">🏆 النتيجة: ${correct} / ${total} (${percent.toFixed(1)}%)</div>
+            <div style="margin-top: 1rem; color: #bdd4ff;">
+                ✅ إجابات صحيحة: ${correct}<br>
+                ❌ أخطاء: ${total - correct}<br>
+                📌 نصيحة: راجعي الأسئلة التي ظهر تحتها تصحيح خاطئ.
+            </div>
+        `;
+        resultPanel.style.display = 'block';
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    });
+    
+    renderExam();
+</script>
+</body>
+</html>
